@@ -1,0 +1,30 @@
+<h4>Найти пользователя</h4>
+<form method="GET" action="" id="searchform">
+    <input class="searchfield" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Введите имя"/>
+    <input type="submit" value="Поиск" class="btn btn-default">
+</form>
+
+{% if messages_list %}
+    <ul>
+        {% for item in messages_list %}
+            <p>{{item.text}} от {{ item.author}}</p>
+        {% endfor %}
+    </ul>
+{% else %}
+
+{% endif %}
+
+
+<h4>Написать сообщение</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+
+
+
+<h4>Список пользователей</h4>
+{% for user in users %}
+    <p><a href="?q={{ user.username }}">{{ user.username}}</a></p>
+{% endfor %}
